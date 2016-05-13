@@ -11,8 +11,8 @@
                           // transition the button press logic will execute.
 
 #define PIXEL_PIN    6    // Digital IO pin connected to the NeoPixels.
-
-#define PIXEL_COUNT 10
+  
+#define PIXEL_COUNT 240
 
 // Parameter 1 = number of pixels in strip,  neopixel stick has 8
 // Parameter 2 = pin number (most are valid)
@@ -44,7 +44,7 @@ void loop() {
     newState = digitalRead(BUTTON_PIN);
     if (newState == LOW) {
       showType++;
-      if (showType > 9)
+      if (showType > 3)
         showType=0;
       startShow(showType);
     }
@@ -56,26 +56,16 @@ void loop() {
 
 void startShow(int i) {
   switch(i){
-    case 0: colorWipe(strip.Color(0, 0, 0), 50);    // Black/off
+    case 0: colorWipe(strip.Color(0, 0, 0,0), 3);    // Black/off
             break;
-    case 1: colorWipe(strip.Color(255, 0, 0), 50);  // Red
+    case 1: colorWipe(strip.Color(0, 0, 0, 255), 3);  // Red
             break;
-    case 2: colorWipe(strip.Color(0, 255, 0), 50);  // Green
-            break;
-    case 3: colorWipe(strip.Color(0, 0, 255), 50);  // Blue
-            break;
-    case 4: theaterChase(strip.Color(127, 127, 127), 50); // White
-            break;
-    case 5: theaterChase(strip.Color(127,   0,   0), 50); // Red
-            break;
-    case 6: theaterChase(strip.Color(  0,   0, 127), 50); // Blue
-            break;
-    case 7: rainbow(20);
-            break;
-    case 8: rainbowCycle(20);
-            break;
-    case 9: theaterChaseRainbow(50);
-            break;
+//    case 2: colorWipe(strip.Color(255, 69, 0, 255), 3);  // Red
+//            break;
+//     case 2: rainbow(1);
+//             break;
+//    case 4: rainbowCycle(20);
+//            break;
   }
 }
 
@@ -149,7 +139,7 @@ void theaterChaseRainbow(uint8_t wait) {
   }
 }
 
-// Input a value 0 to 255 to get a color value.
+// Input a value 0 to 255 to get a color value.s
 // The colours are a transition r - g - b - back to r.
 uint32_t Wheel(byte WheelPos) {
   WheelPos = 255 - WheelPos;
